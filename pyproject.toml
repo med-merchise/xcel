@@ -15,3 +15,9 @@ xcel = "xcel:main"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[dependency-groups]
+test = [
+    "hypothesis>=6.131.8",
+    "pytest>=8.3.5",
+]
