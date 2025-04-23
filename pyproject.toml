@@ -1,0 +1,17 @@
+[project]
+name = "xcel"
+version = "0.1.0"
+description = "Data manipulation using spreadsheets"
+readme = "README.md"
+authors = [
+    { name = "Medardo Antonio Rodriguez" }
+]
+requires-python = ">=3.13"
+dependencies = []
+
+[project.scripts]
+xcel = "xcel:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
