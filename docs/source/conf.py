@@ -6,10 +6,41 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+
+def _package_metadata(project):
+    """Get package metadata (if possible) using `importlib` module."""
+    from importlib.metadata import metadata, PackageNotFoundError
+
+    default = {
+        'author': "Medardo Antonio Rodriguez",
+        'version': '0.1.0',
+        'summary': "Set your project description here",
+    }
+    try:
+        res = metadata(project)
+        return {key: res.get(key, default[key]) for key in default}
+    except PackageNotFoundError:
+        return default
+
+
+def _copyright_interval(start_year):
+    """Calculate the copyright prefix."""
+    from datetime import datetime
+
+    current_year = datetime.now().year
+    if current_year > start_year:
+        return f'{start_year}-{current_year}'
+    else:
+        return f'{start_year}'
+
+
 project = 'xcel'
-copyright = '2025, Medardo Antonio Rodriguez'
-author = 'Medardo Antonio Rodriguez'
-release = '0.1.0'
+_pkg_info = _package_metadata(project)
+
+author = _pkg_info['author']
+copyright = f'{_copyright_interval(2025)}, {author}'
+release = _pkg_info['version']
+version = '.'.join(release.split('.')[:2])
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
